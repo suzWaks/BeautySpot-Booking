@@ -11,7 +11,7 @@ export default function TabLayout() {
                     tabBarInactiveTintColor: '#116ce2',
                     tabBarActiveBackgroundColor: 'rgba(17, 108, 226, 0.05)',
                     tabBarStyle: {
-                        borderRadius: 20, // Customize the border radius to change the shape
+                        borderRadius: 21, // Customize the border radius to change the shape
                     },
                     tabBarItemStyle: {
                         borderRadius: 20,
