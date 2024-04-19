@@ -9,12 +9,12 @@ export default function Splash() {
         <View style={styles.container}>
             <View style={styles.content}>
                 <Image
-                    source={require('../assets/cstlogo176.png')}
-                    style={{ width: 200, height: 200 }}
+                    source={require('../assets/LogoReduced.png')}
+                    // style={{ width: 200, height: 200 }}
                 />
-                <Text style={styles.heading}>CST Beauty Spot</Text>
+                {/* <Text style={styles.heading}>CST Beauty Spot</Text> */}
                 <Text style={styles.text}>
-                    Book salon services from your fingertips
+                    Book salon services {'\n'} from your fingertips
                 </Text>
             </View>
             <View style={styles.buttonContainer}>
@@ -51,8 +51,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     text: {
-        fontSize: 18,
-        marginTop: 10,
-        color: 'grey'
+        fontSize: 20,
+        marginTop: 50,
+        color: 'grey',
+        
     },
 });

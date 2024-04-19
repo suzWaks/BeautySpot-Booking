@@ -11,11 +11,11 @@ export default function TabLayout() {
                     tabBarInactiveTintColor: '#116ce2',
                     tabBarActiveBackgroundColor: 'rgba(17, 108, 226, 0.05)',
                     tabBarStyle: {
-                        borderRadius: 21, // Customize the border radius to change the shape
+                        borderRadius: 21, 
                     },
                     tabBarItemStyle: {
                         borderRadius: 20,
-                        margin:5
+                        margin: 5
 
                     },
                     tabBarShowLabel: false,

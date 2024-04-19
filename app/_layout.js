@@ -1,5 +1,4 @@
-import { Stack, router } from "expo-router";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Stack } from "expo-router";
 
 //Top - app bar
 export default () => {
