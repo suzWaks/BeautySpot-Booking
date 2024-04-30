@@ -1,5 +1,5 @@
 {
-  "name": "trial",
+  "name": "Beauty Spot Booking",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -24,12 +24,15 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
     "react-native-animatable": "^1.4.0",
+    "react-native-element-dropdown": "^2.10.4",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-linear-gradient": "^2.8.3",
+    "react-native-modern-datepicker": "^1.0.0-beta.91",
     "react-native-pager-view": "6.2.3",
     "react-native-paper": "^5.12.3",
     "react-native-reanimated": "~3.6.2",
     "react-native-reanimated-carousel": "^3.5.1",
+    "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "^4.8.2",
     "react-native-screens": "~3.29.0",
     "react-native-tab-view": "^3.5.2",

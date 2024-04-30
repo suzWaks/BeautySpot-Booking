@@ -128,7 +128,6 @@ const BookingDetails = () => {
                                             style={[
                                                 style.numbers,
                                                 {
-                                                    fontFamily: "Roboto",
                                                     fontWeight: "bold",
                                                     fontSize: 15,
                                                     alignSelf: "center",
@@ -203,7 +202,6 @@ const style = StyleSheet.create({
     textHeader: {
         padding: 2,
         fontSize: 15,
-        fontFamily: "sans-serif-medium",
         marginLeft: "15%",
         fontWeight: "900",
         color: "#2D7FE9",
