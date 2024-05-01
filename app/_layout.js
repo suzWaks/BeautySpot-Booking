@@ -26,6 +26,7 @@ export default () => {
         options={{ title: "Home", headerShown: false }}
       />
       <Stack.Screen name="Splash" options={{ headerShown: false }} />
+
       <Stack.Screen
         name="pages/Login"
         options={{ title: "Login", headerShown: false }}

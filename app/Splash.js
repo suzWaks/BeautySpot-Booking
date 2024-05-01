@@ -4,6 +4,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Button from "./components/button";
 import { useNavigation } from "@react-navigation/native";
+import { FONTS, SIZES } from "./utils/theme";
 
 export default function Splash() {
   const navigation = useNavigation();

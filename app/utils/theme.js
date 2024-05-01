@@ -10,7 +10,7 @@ const COLORS = {
   SUCCESS: "#009688",
 };
 
-const FONT = {
+const FONTS = {
   regular: "LoraRegular",
   medium: "LoraMedium",
   semiBold: "LoraSemiBold",
@@ -49,4 +49,4 @@ const SHADOWS = {
   },
 };
 
-export { COLORS, FONT, SIZES, SHADOWS };
+export { COLORS, FONTS, SIZES, SHADOWS };
