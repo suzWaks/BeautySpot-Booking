@@ -41,7 +41,7 @@ function ServiceIconList2({ type, allService }) {
     },
     {
       id: 7,
-      source: require("../../assets/Female Icons/7. Bleach.png"),
+      source: require("../../assets/femaleicons/bleach.png"),
       type: "female",
       name: "Bleach",
     },

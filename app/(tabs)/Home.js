@@ -12,22 +12,13 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import GenderTab from "../components/GenderTab";
-import Icon from "../components/Icon";
-import ServiceIconList from "../components/ServiceIconList";
 import ServiceButton from "../components/ServiceButton";
 import { useState, useRef } from "react";
-
-import { TabView, SceneMap } from "react-native-tab-view";
 import HomeBanner from "../components/HomeBanner";
-import { Button, Divider } from "react-native-paper";
-import BookingSuccess from "../BookingSuccess";
 import { Animated } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
 import ServiceIconList2 from "../components/ServiceIconList2";
 import Testimonials from "../components/Testimonials";
-import { NavigationContainer } from "@react-navigation/native";
-
 export default function Home() {
   const heightValue = useRef(new Animated.Value(0)).current;
 
@@ -41,11 +32,6 @@ export default function Home() {
     setAllService(!allService);
   };
 
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: "first", title: "Male" },
-    { key: "second", title: "Female" },
-  ]);
   const [value, setValue] = React.useState("male");
 
   return (
