@@ -28,7 +28,9 @@ const Login = () => {
                 placeholder='abcd@gmail.com'
                 mode='outlined'
                 style={styles.input}
+                outlineStyle={{ borderRadius: 20 }}
                 left={<TextInput.Icon icon="email-outline" />}
+
             />
 
             <TextInput
@@ -38,6 +40,7 @@ const Login = () => {
                 placeholder='*********'
                 width='width'
                 mode='outlined'
+                outlineStyle={{ borderRadius: 20 }}
                 style={styles.input}
                 right={
                     <TextInput.Icon
@@ -53,7 +56,7 @@ const Login = () => {
                 onPress={() => {
                     navigation.navigate('(tabs)');
                 }}
-                style={styles.input}
+                margintop='20'
             />
             <Text style={styles.div}>or</Text>
 
@@ -87,6 +90,7 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         marginBottom: 20,
+        backgroundColor: 'transparent'
     },
     gbtn: {
         width: '100%',
@@ -102,4 +106,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
 
     },
+    div: {
+        padding: 20
+    }
 })

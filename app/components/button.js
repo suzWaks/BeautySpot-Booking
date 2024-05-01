@@ -3,7 +3,7 @@ import { Text, StyleSheet, Pressable } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function Btns(props) {
-    const { onPress, title, icon } = props;
+    const { onPress, title, icon, margintop } = props;
     return (
         <Pressable style={styles.button} onPress={onPress}>
             <Text style={styles.text}>{title}</Text>
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         elevation: 3,
         backgroundColor: '#116CE2',
         flexDirection: 'row',
-        width: '100%'
+        width: '100%',
+        marginTop: {margintop}
     },
     text: {
         fontSize: 16,
