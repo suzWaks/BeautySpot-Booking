@@ -36,7 +36,10 @@ function Testimonials() {
             marginTop: 20,
             marginBottom: 20,
           }}>
-          <Image source={require("../../assets/right.png")} style={styles.quote} />
+          <Image
+            source={require("../../assets/right.png")}
+            style={styles.quote}
+          />
           <Image
             source={require("../../assets/left.png")}
             style={styles.unquote}
@@ -53,7 +56,6 @@ function Testimonials() {
               <Icon name="star" size={25} color="#1877F2" />
               <Icon name="star-outline" size={25} color="#1877F2" />
               <Icon name="star-outline" size={25} color="#1877F2" />
-              {/* <Icon name="rocket" size={30} color="#900" /> */}
             </View>
           </View>
         </View>
