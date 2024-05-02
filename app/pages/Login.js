@@ -1,12 +1,12 @@
 /** @format */
 
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image} from "react-native";
 import { useState } from "react";
 import Btns from "../components/button";
 import { TextInput, Button } from "react-native-paper";
 import { Link } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
-import { FONTS, SIZES } from "../utils/theme";
+import { FONTS, SIZES, COLORS } from "../utils/theme";
 
 const { width } = Dimensions.get("window");
 
@@ -21,6 +21,7 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
+      
       <Text style={styles.header}>Login</Text>
 
       <TextInput
@@ -30,7 +31,7 @@ const Login = () => {
         placeholder="abcd@gmail.com"
         mode="outlined"
         style={styles.input}
-        outlineStyle={{ borderRadius: 20 }}
+        outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
         left={<TextInput.Icon icon="email-outline" />}
       />
 
@@ -41,7 +42,7 @@ const Login = () => {
         placeholder="*********"
         width="width"
         mode="outlined"
-        outlineStyle={{ borderRadius: 20 }}
+        outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
         style={styles.input}
         right={
           <TextInput.Icon
@@ -57,7 +58,7 @@ const Login = () => {
         onPress={() => {
           navigation.navigate("(tabs)");
         }}
-        margintop="20"
+        margintop={50}
       />
       <Text style={styles.div}>or</Text>
 
@@ -70,15 +71,15 @@ const Login = () => {
         )}
         mode="outlined"
         textColor="#116CE2"
-        labelStyle={{ fontSize: 16 }}
+        labelStyle={{ fontSize: SIZES.medium, fontFamily: FONTS.medium }}
         style={styles.gbtn}
         onPress={() => console.log("Pressed")}>
-        Sign in with Google
+        Login with Google
       </Button>
 
       <Text>
         Don't have an account?{" "}
-        <Link href="Pages/Register" style={{ color: "#116ce2" }}>
+        <Link href="pages/Register" style={{ color: "#116ce2"}}>
           Register now
         </Link>
       </Text>
@@ -91,7 +92,7 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.WHITE_BG,
     alignItems: "center",
     justifyContent: "center",
     width: width,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 10,
     backgroundColor: "transparent",
   },
   gbtn: {
@@ -109,14 +110,16 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     marginBottom: 20,
+    backgroundColor: "#ffffff"
+
   },
   header: {
     fontFamily: FONTS.bold,
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 20,
+    fontSize: SIZES.xxLarge,
+    marginBottom: 50,
   },
   div: {
-    padding: 20,
+    padding: 10,
+    fontSize: SIZES.medium
   },
 });

@@ -27,6 +27,7 @@ export default function Splash() {
           onPress={() => {
             navigation.replace("pages/Login");
           }}
+          paddingright={20}
         />
       </View>
     </View>

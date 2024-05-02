@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Platform, KeyboardAvoidingView } from 'react-native'
 import { useState } from 'react'
 import Btns from '../components/button'
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Provider } from 'react-native-paper';
 import { Link } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 const { width } = Dimensions.get('window');
+import { FONTS, SIZES, COLORS } from "../utils/theme";
 
 const UserReg = () => {
     const navigation = useNavigation();
@@ -15,8 +16,10 @@ const UserReg = () => {
     };
 
     return (
-        <View style={styles.container}>
-
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
             <TextInput
                 label="User Name"
                 activeOutlineColor='#116CE2'
@@ -25,6 +28,7 @@ const UserReg = () => {
                 mode='outlined'
                 style={styles.input}
                 left={<TextInput.Icon icon="account-outline" />}
+                outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
             />
             <TextInput
                 label="Email"
@@ -34,6 +38,7 @@ const UserReg = () => {
                 mode='outlined'
                 style={styles.input}
                 left={<TextInput.Icon icon="email-outline" />}
+                outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
             />
             <TextInput
                 label="Phone Number"
@@ -44,6 +49,7 @@ const UserReg = () => {
                 style={styles.input}
                 left={<TextInput.Icon icon="phone-outline" />}
                 keyboardType="numeric"
+                outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
             />
 
             <TextInput
@@ -62,6 +68,7 @@ const UserReg = () => {
                 }
                 left={<TextInput.Icon icon="lock-outline" />}
                 secureTextEntry={secureTextEntry}
+                outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
             />
             <TextInput
                 label="Confirm Password"
@@ -79,6 +86,7 @@ const UserReg = () => {
                 }
                 left={<TextInput.Icon icon="lock-outline" />}
                 secureTextEntry={secureTextEntry}
+                outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
             />
             <Btns
                 title="Register"
@@ -86,11 +94,11 @@ const UserReg = () => {
                     navigation.replace('Pages/Login');
                 }}
                 style={styles.input}
+                margintop={30}
             />
 
-            <Text>Already have an account? <Link href='Pages/Login' style={{ color: '#116ce2' }}>Login</Link></Text>
-
-        </View>
+            <Text style={{marginTop:20}}>Already have an account? <Link href='pages/Login' style={{ color: '#116ce2' }}>Login</Link></Text>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -99,22 +107,14 @@ export default UserReg
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: COLORS.WHITE_BG,
         alignItems: 'center',
-        justifyContent: 'center',
         width: width,
         paddingHorizontal: 30,
+        paddingTop: 30
     },
     input: {
         width: '100%',
-        marginBottom: 20,
-    },
-    gbtn: {
-        width: '100%',
-        height: 50,
-        borderRadius: 50,
-        alignContent: 'center',
-        justifyContent: 'center',
         marginBottom: 20,
     },
     header: {

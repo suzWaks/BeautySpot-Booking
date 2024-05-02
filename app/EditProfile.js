@@ -7,11 +7,9 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
-
-// import { Button, Card, Dialog, Portal, Provider } from "react-native-paper";
 
 import {
   TextInput,
@@ -20,9 +18,8 @@ import {
   Portal,
   Provider,
 } from "react-native-paper";
-// import { Link } from 'expo-router';
+
 import { useNavigation } from "@react-navigation/native";
-// const { width } = Dimensions.get("window");
 
 const EditProfile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -78,7 +75,7 @@ const EditProfile = () => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         backgroundColor: "white",
@@ -117,7 +114,6 @@ const EditProfile = () => {
               </View>
             </TouchableOpacity>
           </View>
-          {/* suz */}
 
           <View style={styles.container}>
             <TextInput
@@ -255,7 +251,7 @@ const EditProfile = () => {
           </Dialog>
         </Portal>
       </Provider>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -3,12 +3,13 @@
 import React from "react";
 import { Text, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { FONTS, SIZES } from "../utils/theme";
 
 export default function Btns(props) {
-  const { onPress, title, icon, margintop } = props;
+  const { onPress, title, icon, margintop, paddingright } = props;
   return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+    <Pressable style={[styles.button, { marginTop: margintop }]} onPress={onPress}>
+      <Text style={[styles.text, { paddingRight: paddingright }]}>{title}</Text>
       {icon && <AntDesign name={icon} size={24} color="white" />}
     </Pressable>
   );
@@ -25,14 +26,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#116CE2",
     flexDirection: "row",
     width: "100%",
-    marginTop: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: SIZES.medium,
     lineHeight: 21,
-    fontWeight: "bold",
+    fontFamily: FONTS.bold,
     letterSpacing: 0.25,
     color: "white",
-    paddingRight: 15,
   },
 });
