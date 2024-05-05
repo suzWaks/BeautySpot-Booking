@@ -115,7 +115,7 @@ const UserReg = () => {
                     margintop={30}
                 />
 
-                <Text>Already have an account? <Link href='pages/Login' style={{ color: '#116ce2' }}>Login</Link></Text>
+                <Text style={{marginTop:20}}>Already have an account? <Link href='pages/Login' style={{ color: '#116ce2' }}>Login</Link></Text>
 
             </KeyboardAvoidingView>
             
