@@ -61,12 +61,25 @@ const styles = StyleSheet.create({
 });
 
 //Color Change logic handle
-const TimeCard = ({ time }) => {
+const TimeCard = ({time}) => {
+  const [isSelected,setIsSelected]=useState(false)
+  const colorChange=()=>{
+    setIsSelected(!isSelected);
+  }
+  const containerColor = {
+    backgroundColor: isSelected? COLORS.PRIMARY:COLORS.WHITE,
+  }
+  const textColor ={
+    color: isSelected? COLORS.WHITE : COLORS.BLACK
+  }
+
+
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container,containerColor]}
+      onPress={()=>colorChange()}
     >
-      <Text>{time}</Text>
+      <Text style={textColor}>{time}</Text>
     </TouchableOpacity>
   );
 };
