@@ -3,12 +3,22 @@ import { SelectList } from "react-native-dropdown-select-list"
 import { useState } from "react"
 import { COLORS, SIZES, FONTS } from "../../utils/theme";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-import Btns from "../../components/button";
+import Dialog from "react-native-dialog";
 
 function MaleService() {
 
     const [service, setService] = useState("");
     const [category, setCategory] = useState("");
+
+    const [visible, setVisible] = useState(false);
+
+    const showDialog = () => {
+        setVisible(true);
+    };
+
+    const handleCancel = () => {
+        setVisible(false);
+    };
 
     const services = [
         { key: '1', value: 'Haircut' },
@@ -43,7 +53,12 @@ function MaleService() {
             />
 
             {service && (
-                <Text style={{ padding: 10, fontFamily: FONTS.medium, marginTop: 20 }}>Categories:</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ padding: 10, fontFamily: FONTS.medium, marginTop: 40, }}>Categories:</Text>
+                    <TouchableOpacity>
+                        <AntDesign name="pluscircleo" size={24} color={COLORS.PRIMARY} style={{ marginTop: 45, marginRight: 20 }} />
+                    </TouchableOpacity>
+                </View>
             )}
 
             {categories[service] && categories[service].map(category => (
@@ -52,27 +67,34 @@ function MaleService() {
                     <Text key={categories.key}>{category.value}</Text>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity>
-                            <MaterialCommunityIcons name="square-edit-outline" size={30} color="skyblue" />
+                            <MaterialCommunityIcons name="square-edit-outline" size={30} color={COLORS.PRIMARY} />
                         </TouchableOpacity>
                         <TouchableOpacity>
-                            <MaterialCommunityIcons name="delete-outline" size={30} color="red" />
+                            <MaterialCommunityIcons name="delete-outline" size={30} color={COLORS.WARNING} />
                         </TouchableOpacity>
                     </View>
                 </View>
             ))}
 
             <View style={styles.buttonGroup}>
-                <Pressable style={[styles.button, { marginTop: 20 }]} >
-                    <Text style={[styles.text, { paddingRight: 10 }]}>Edit Service</Text>
+                <Pressable style={[styles.button, { marginTop: 20 }]} onPress={showDialog}>
+                    <Text style={[styles.text, { paddingRight: 10 }]} >Edit Service</Text>
                     {/* {icon && <AntDesign name={icon} size={24} color="white" />} */}
                 </Pressable>
-                <Pressable style={[styles.button, { marginTop: 20 }]} >
-                    <Text style={[styles.text, { paddingRight: 10 }]}>Add Service</Text>
+                <Pressable style={[styles.button, { marginTop: 20 }]} onPress={showDialog}>
+                    <Text style={[styles.text, { paddingRight: 10 }]} >Add Service</Text>
                     {/* {icon && <AntDesign name={icon} size={24} color="white" />} */}
                 </Pressable>
             </View>
-
+            <Dialog.Container visible={visible}>
+                <Dialog.Title>Edit Service</Dialog.Title>
+                <Dialog.Input placeholder="Service name" value={service} />
+                <Dialog.Button label="Cancel" onPress={handleCancel} />
+                <Dialog.Button label="Delete" onPress={handleCancel} />
+                <Dialog.Button label="Update" onPress={handleCancel} />
+            </Dialog.Container>
         </ScrollView>
+
     )
 }
 
@@ -111,7 +133,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         flex: 1,
         borderRadius: 30,
-        backgroundColor: "#116CE2",
+        backgroundColor: COLORS.PRIMARY,
         flexDirection: "row",
         paddingVertical: 15,
         marginHorizontal: 5
