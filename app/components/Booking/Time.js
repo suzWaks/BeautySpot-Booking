@@ -1,11 +1,31 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View, ScrollView, TouchableWithoutFeedback} from 'react-native'
 import React from 'react'
+import { FONTS,COLORS } from '../../utils/theme'
 
-const Time = () => {
+var {width,height}=Dimensions.get('window')
+const Time = ({data}) => {
+
+  const changeColor=()=>{
+    backgroundColor:COLORS.PRIMARY
+  }
   return (
-    <TouchableOpacity style={styles.container} onPress={() =>console.log(button_click)}>
-      <Text style ={styles.time}>10:20am - 11:00am</Text>
-    </TouchableOpacity>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{paddingBottom:10}}
+    >
+      {
+        data.map((item,index)=>{
+          return(
+            <TimeCard
+              key={index}
+              time="11:30-12:30"
+            />
+          )
+        })
+      }
+
+    </ScrollView>
   )
 }
 
@@ -13,10 +33,11 @@ export default Time
 
 const styles = StyleSheet.create({
   container:{
-    width:125,
-    height:40,
+    height:height*0.06,
+    width:width*0.4,
     backgroundColor:"#116CE2",
     justifyContent:'center',
+    alignItems:'center',
     borderRadius:11,
     shadowColor: '#000',
       shadowOffset: {
@@ -31,6 +52,15 @@ const styles = StyleSheet.create({
   time:{
     fontSize:13,
     paddingHorizontal:3,
-    color:'white'
+    color:'white',
+    alignItems:'center'
   }
 })
+
+const TimeCard=({time})=>{
+  return(
+    <TouchableOpacity style={styles.container}>
+      <Text>{time}</Text>
+    </TouchableOpacity>
+  )
+}
