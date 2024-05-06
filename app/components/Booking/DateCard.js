@@ -4,7 +4,7 @@ import { FONTS, SIZES, SHADOWS, COLORS } from "../../utils/theme";
 
 const DateCard = ({ currentDay, date, week, backgroundColor, textColor }) => {
   return (
-    <TouchableWithoutFeedback onPress={()=>console.log("date pressed")}>
+    <TouchableWithoutFeedback onPress={()=>console.log('hello')}>
       <View style={[styles.container, { backgroundColor: backgroundColor }]}>
         <Text style={{ fontSize: SIZES.small, color: textColor ,fontFamily:FONTS.regular}}>{currentDay}</Text>
         <Text style={{ fontSize: SIZES.xxLarge, fontFamily:FONTS.bold, color: textColor }}>
