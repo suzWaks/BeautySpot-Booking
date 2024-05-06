@@ -288,10 +288,9 @@ const styles = StyleSheet.create({
   button: {
     height: height*0.06,
     width: width*0.3,
-    borderWidth: 2,
-    borderColor: "#8F0000",
     justifyContent: "center",
     borderRadius: 35,
+    borderWidth:1,
     marginHorizontal:10,
   },
 });
