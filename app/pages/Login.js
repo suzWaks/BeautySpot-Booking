@@ -1,12 +1,13 @@
 /** @format */
 
-import { View, Text, StyleSheet, Dimensions, Image} from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { useState } from "react";
 import Btns from "../components/button";
 import { TextInput, Button } from "react-native-paper";
 import { Link } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { FONTS, SIZES, COLORS } from "../utils/theme";
+import { useAuth } from '../../context/AuthContext';
 
 const { width } = Dimensions.get("window");
 
@@ -19,9 +20,18 @@ const Login = () => {
     setSecureTextEntry(!secureTextEntry);
   };
 
+
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('admin');
+  const { onLogin } = useAuth();
+
+  const onSignInPress = async () => {
+    onLogin(username, password);
+  };
+
   return (
     <View style={styles.container}>
-      
+
       <Text style={styles.header}>Login</Text>
 
       <TextInput
@@ -33,6 +43,8 @@ const Login = () => {
         style={styles.input}
         outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
         left={<TextInput.Icon icon="email-outline" />}
+        value={username}
+        onChangeText={setUsername}
       />
 
       <TextInput
@@ -52,12 +64,12 @@ const Login = () => {
         }
         left={<TextInput.Icon icon="lock-outline" />}
         secureTextEntry={secureTextEntry}
+        value={password}
+        onChangeText={setPassword}
       />
       <Btns
         title="Log in"
-        onPress={() => {
-          navigation.navigate("(tabs)");
-        }}
+        onPress={onSignInPress}
         margintop={50}
       />
       <Text style={styles.div}>or</Text>
@@ -79,7 +91,7 @@ const Login = () => {
 
       <Text>
         Don't have an account?{" "}
-        <Link href="pages/Register" style={{ color: "#116ce2"}}>
+        <Link href="pages/Register" style={{ color: "#116ce2" }}>
           Register now
         </Link>
       </Text>

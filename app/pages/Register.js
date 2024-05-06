@@ -9,7 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 const Register = () => {
     const navigation = useNavigation();
     return (
-        <Tab.Navigator>
+        <Tab.Navigator >
             <Tab.Screen name="User" component={UserReg} />
             <Tab.Screen name="Service Provider" component={SPReg} />
         </Tab.Navigator>

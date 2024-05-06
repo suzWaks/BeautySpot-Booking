@@ -18,6 +18,7 @@ import DropdownCom from "../components/Booking/DropdownCom";
 import Time from "../components/Booking/Time";
 import CheckBox from "../components/Booking/CheckBox";
 import { FONTS, COLORS, SIZES } from "../utils/theme";
+import { router } from 'expo-router';
 
 var { width, height } = Dimensions.get("window");
 const Appointment = () => {
@@ -28,7 +29,7 @@ const Appointment = () => {
   //   const [selectedStartDate, setSelectedStartDate] = useState("");
   //   const [startedDate, setStartedDate] = useState("2024/12/22");
 
-        const [time,setTime]=useState([1,2,3,4,5,6,7])
+  const [time, setTime] = useState([1, 2, 3, 4, 5, 6, 7])
 
   function handleChangeStartDate(propDate) {
     setStartedDate(propDate);
@@ -159,7 +160,7 @@ const Appointment = () => {
             Available Slots
           </Text>
           {/* Time slots */}
-          <Time data={time} style={styles.slots}/>
+          <Time data={time} style={styles.slots} />
         </View>
 
         <View style={styles.allergiesContainer}>

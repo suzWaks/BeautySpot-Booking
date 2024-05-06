@@ -1,9 +1,24 @@
 /** @format */
 
-import { Stack } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
+import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
 
-//Top - app bar
-export default () => {
+const StackLayout = () => {
+  const { authState } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    const inAuthGroup = segments[0] === '(tabs)';
+
+    if (!authState?.authenticated && inAuthGroup) {
+      router.replace('/');
+    } else if (authState?.authenticated === true) {
+      router.replace('Home');
+    }
+  }, [authState]);
+
   return (
     <Stack
       screenOptions={{
@@ -48,3 +63,13 @@ export default () => {
     </Stack>
   );
 };
+
+const RootLayoutNav = () => {
+  return (
+    <AuthProvider>
+      <StackLayout />
+    </AuthProvider>
+  );
+};
+
+export default RootLayoutNav;

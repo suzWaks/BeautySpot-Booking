@@ -1,114 +1,136 @@
-/** @format */
-import React from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
-import ServiceButton from "../components/ServiceButton";
-import { useState, useRef } from "react";
-import HomeBanner from "../components/HomeBanner";
-import { Animated } from "react-native";
-import { SegmentedButtons } from "react-native-paper";
-import ServiceIconList2 from "../components/ServiceIconList2";
-import Testimonials from "../components/Testimonials";
-export default function Home() {
-  const heightValue = useRef(new Animated.Value(0)).current;
+import { Stack } from 'expo-router';
+import React from 'react'
+import { StyleSheet, View, Image, Dimensions, ScrollView, Text, TouchableOpacity } from 'react-native'
+import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
+import { COLORS, FONTS, SIZES } from '../utils/theme';
+import { router } from 'expo-router';
+import { Avatar, Button } from 'react-native-paper';
+import Home from '../components/HomeComp';
 
-  const [allService, setAllService] = useState(true);
-  const handleClick = () => {
-    Animated.timing(heightValue, {
-      toValue: allService ? 0 : 10,
-      duration: 50000,
-      useNativeDriver: true,
-    }).start();
-    setAllService(!allService);
-  };
 
-  const [value, setValue] = React.useState("male");
+const { width } = Dimensions.get("window");
+const img_height = 200;
 
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView style={styles.scrollContainer} scrollEnabled>
+export default function trial() {
+
+    const scrollRef = useAnimatedRef();
+    const scrollOffset = useScrollViewOffset(scrollRef);
+
+    const imageAnimatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [
+                {
+                    translateY: interpolate(
+                        scrollOffset.value,
+                        [-img_height, 0, img_height],
+                        [-img_height / 2, 0, img_height * 0.75]
+                    )
+                },
+                {
+                    scale: interpolate(
+                        scrollOffset.value,
+                        [-img_height, 0, img_height],
+                        [2, 1, 1]
+                    )
+                }
+            ]
+        };
+    })
+
+
+    const headerAnimatedStyle = useAnimatedStyle(() => {
+        return {
+            opacity: interpolate(
+                scrollOffset.value,
+                [0, img_height / 1.5],
+                [0, 1],
+            )
+        };
+    })
+    return (
+
+
         <View style={styles.container}>
-          <HomeBanner bookingSuccess={false} />
-          <Text style={[styles.serviceQuery, { textAlign: "left" }]}>
-            What are you looking for ?
-          </Text>
-          {/* <GenderTab /> */}
-          <SegmentedButtons
-            style={{ backgroundColor: "white", borderRadius: 0 }}
-            value={value}
-            onValueChange={setValue}
-            buttons={[
-              {
-                value: "male",
-                label: "Male",
-                style: {
-                  borderBottomColor: value === "male" ? "#116CE2" : "white",
-                  backgroundColor: "white",
-                  borderColor: "white",
-                  borderRadius: 0,
-                },
-              },
-              {
-                value: "female",
-                label: "Female",
-                style: {
-                  borderBottomColor: value === "female" ? "#116CE2" : "white",
-                  backgroundColor: "white",
-                  borderColor: "white",
-                  borderRadius: 0,
-                },
-              },
-            ]}
-          />
-          <ServiceIconList2 type={value} allService={allService} />
-          {allService ? (
-            <ServiceButton onPress={handleClick} text={"Close All Service"} />
-          ) : (
-            <ServiceButton onPress={handleClick} text={"Show all Service"} />
-          )}
-          <Testimonials />
-          <StatusBar style="auto" />
+            <Stack.Screen options={{
+                headerTransparent: true,
+                headerRight: () => (
+                    <TouchableOpacity onPress={() => router.navigate('/Profile')} style={{ paddingRight: 20 }}>
+                        <Avatar.Image size={30} source={require('../../assets/Profile.jpg')} />
+                    </TouchableOpacity>
+                ),
+                headerBackground: () => <Animated.View style={[styles.header, headerAnimatedStyle]} />
+
+            }} />
+            <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
+                <Animated.View style={[styles.container, imageAnimatedStyle]}>
+                    <Animated.Image
+                        source={{ uri: 'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8U2Fsb258ZW58MHx8MHx8fDA%3D' }}
+                        style={styles.image}
+                    />
+                    <View style={styles.overlay}>
+                        <View style={styles.overlayContainer}>
+                            <Text style={styles.overlayText}>
+                                KuzuZangpo la
+                            </Text>
+                            <Text style={styles.userName}>
+                                Suzal Wakhley ADMIN
+                            </Text>
+                        </View>
+                    </View>
+                </Animated.View>
+
+
+                <View style={{ height: 1000, backgroundColor: "#FFFFFF" }}>
+                    <Home />
+                </View >
+            </Animated.ScrollView>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+
+
+    )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 10,
-    padding: 10,
-    fontFamily: "Times New Roman",
-    display: "flex",
-    flexDirection: "column",
-    gap: 20,
-    backgroundColor: "#F4F7FC",
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  tabcontainer: {
-    marginBottom: 20,
-  },
-  scene: {
-    flex: 1,
-  },
-  serviceQuery: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "black",
-    fontFamily: "Times New Roman",
-    textAlign: "left",
-  },
-});
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        position: 'relative',
+    },
+    image: {
+        width: width,
+        height: img_height,
+        resizeMode: 'cover',
+    },
+    header: {
+        backgroundColor: COLORS.PRIMARY,
+        height: 100,
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgba(17, 100, 226, 0.75)'
+    },
+    overlayContainer: {
+        position: 'absolute',
+        bottom: 20,
+        left: 0,
+        right: 0,
+        padding: 10,
+    },
+    overlayText: {
+        fontFamily: FONTS.regular,
+        fontSize: SIZES.large,
+        textAlign: 'left',
+        color: 'white',
+        paddingBottom: 10,
+    },
+    userName: {
+        fontSize: SIZES.xxLarge,
+        fontFamily: FONTS.bold,
+        textAlign: 'left',
+        color: 'white',
+    },
+})

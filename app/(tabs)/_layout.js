@@ -1,9 +1,12 @@
-import { Feather, MaterialCommunityIcons, FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
+import { Feather, MaterialCommunityIcons, FontAwesome5, FontAwesome6, AntDesign } from '@expo/vector-icons';
 import { Tabs, router } from 'expo-router';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-paper';
+import { Role, useAuth } from '../../context/AuthContext';
 
 //Bottom tab navigation
 export default function TabLayout() {
+    const { authState } = useAuth();
     return (
         <>
             <Tabs
@@ -11,7 +14,7 @@ export default function TabLayout() {
                     tabBarInactiveTintColor: '#116ce2',
                     tabBarActiveBackgroundColor: 'rgba(17, 108, 226, 0.05)',
                     tabBarStyle: {
-                        borderRadius: 21, 
+                        borderRadius: 21,
                     },
                     tabBarItemStyle: {
                         borderRadius: 20,
@@ -30,14 +33,28 @@ export default function TabLayout() {
                 <Tabs.Screen
                     name="Home"
                     options={{
-                        title: 'Home',
+                        title: '',
                         tabBarIcon: ({ color }) => <Feather name="home" size={24} color={color} />,
                         headerRight: () => (
-                            <View style={{ paddingRight: 10 }}>
-                                <FontAwesome5 onPress={() => router.navigate('/Profile')} name="user-circle" size={24} color="white" />
-                            </View>
+                            <TouchableOpacity onPress={() => router.navigate('/Profile')} style={{ paddingRight: 20 }}>
+                                <Avatar.Image size={30} source={require('../../assets/Profile.jpg')} />
+                            </TouchableOpacity>
                         ),
                     }}
+                    redirect={authState?.role !== 'admin'}
+                />
+                <Tabs.Screen
+                    name="Homeu"
+                    options={{
+                        title: '',
+                        tabBarIcon: ({ color }) => <Feather name="home" size={24} color={color} />,
+                        headerRight: () => (
+                            <TouchableOpacity onPress={() => router.navigate('/Profile')} style={{ paddingRight: 20 }}>
+                                <Avatar.Image size={30} source={require('../../assets/Profile.jpg')} />
+                            </TouchableOpacity>
+                        ),
+                    }}
+                    redirect={authState?.role !== 'user'}
                 />
                 <Tabs.Screen
                     name="Appointment"
@@ -59,13 +76,15 @@ export default function TabLayout() {
                         title: 'Bookings',
                         tabBarIcon: ({ color }) => <Feather name="info" size={24} color={color} />,
                     }}
+                    redirect={authState?.role !== 'user'}
                 />
                 <Tabs.Screen
-                    name="trial"
+                    name="AddService"
                     options={{
-                        title: '',
-                        tabBarIcon: ({ color }) => <Feather name="info" size={24} color={color} />,
+                        title: 'Service',
+                        tabBarIcon: ({ color }) => <AntDesign name="pluscircleo" size={24} color={color} />,
                     }}
+                    redirect={authState?.role !== 'admin'}
                 />
             </Tabs>
         </>

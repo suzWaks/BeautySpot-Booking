@@ -1,12 +1,11 @@
 import { Stack } from 'expo-router';
 import React from 'react'
-import { StyleSheet, View, Image, Dimensions, ScrollView, Text } from 'react-native'
+import { StyleSheet, View, Image, Dimensions, ScrollView, Text, TouchableOpacity } from 'react-native'
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
 import { COLORS, FONTS, SIZES } from '../utils/theme';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { overlay } from 'react-native-paper';
-import Home from './Home';
+import { Avatar, Button } from 'react-native-paper';
+import Home from '../components/HomeComp';
 
 
 const { width } = Dimensions.get("window");
@@ -14,7 +13,7 @@ const img_height = 200;
 
 export default function trial() {
 
-    const scrollRef = useAnimatedRef(); 
+    const scrollRef = useAnimatedRef();
     const scrollOffset = useScrollViewOffset(scrollRef);
 
     const imageAnimatedStyle = useAnimatedStyle(() => {
@@ -55,9 +54,9 @@ export default function trial() {
             <Stack.Screen options={{
                 headerTransparent: true,
                 headerRight: () => (
-                    <View style={{ paddingRight: 10 }}>
-                        <FontAwesome5 onPress={() => router.navigate('/Profile')} name="user-circle" size={24} color="white" />
-                    </View>
+                    <TouchableOpacity onPress={() => router.navigate('/Profile')} style={{ paddingRight: 20 }}>
+                        <Avatar.Image size={30} source={require('../../assets/Profile.jpg')} />
+                    </TouchableOpacity>
                 ),
                 headerBackground: () => <Animated.View style={[styles.header, headerAnimatedStyle]} />
 
@@ -74,7 +73,7 @@ export default function trial() {
                                 KuzuZangpo la
                             </Text>
                             <Text style={styles.userName}>
-                                Suzal Wakhley
+                                Suzal Wakhley USER
                             </Text>
                         </View>
                     </View>
@@ -82,7 +81,7 @@ export default function trial() {
 
 
                 <View style={{ height: 1000, backgroundColor: "#FFFFFF" }}>
-                    <Home/>
+                    <Home />
                 </View >
             </Animated.ScrollView>
         </View>

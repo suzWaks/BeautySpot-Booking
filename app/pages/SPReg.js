@@ -16,11 +16,8 @@ const UserReg = () => {
     };
 
     return (
-            <KeyboardAvoidingView
-                style={styles.container}
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-            >
-                
+        <ScrollView style={{backgroundColor: COLORS.WHITE_BG}}>
+            <View style={styles.container}>
                 <TextInput
                     label="User Name"
                     activeOutlineColor='#116CE2'
@@ -29,7 +26,7 @@ const UserReg = () => {
                     mode='outlined'
                     style={styles.input}
                     left={<TextInput.Icon icon="account-outline" />}
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <TextInput
                     label="Email"
@@ -39,7 +36,7 @@ const UserReg = () => {
                     mode='outlined'
                     style={styles.input}
                     left={<TextInput.Icon icon="email-outline" />}
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <TextInput
                     label="Phone Number"
@@ -50,7 +47,7 @@ const UserReg = () => {
                     style={styles.input}
                     left={<TextInput.Icon icon="phone-outline" />}
                     keyboardType="numeric"
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <TextInput
                     label="Salon Name"
@@ -59,7 +56,7 @@ const UserReg = () => {
                     mode='outlined'
                     style={styles.input}
                     left={<TextInput.Icon icon="home-roof" />}
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <TextInput
                     label="Salon License Number"
@@ -68,7 +65,7 @@ const UserReg = () => {
                     mode='outlined'
                     style={styles.input}
                     left={<TextInput.Icon icon="file-document-outline" />}
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <TextInput
                     label="Password"
@@ -86,7 +83,7 @@ const UserReg = () => {
                     }
                     left={<TextInput.Icon icon="lock-outline" />}
                     secureTextEntry={secureTextEntry}
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <TextInput
                     label="Confirm Password"
@@ -104,7 +101,7 @@ const UserReg = () => {
                     }
                     left={<TextInput.Icon icon="lock-outline" />}
                     secureTextEntry={secureTextEntry}
-                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff"}}
+                    outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
                 />
                 <Btns
                     title="Register"
@@ -115,10 +112,11 @@ const UserReg = () => {
                     margintop={30}
                 />
 
-                <Text style={{marginTop:20}}>Already have an account? <Link href='pages/Login' style={{ color: '#116ce2' }}>Login</Link></Text>
+                <Text style={{ marginTop: 20 }}>Already have an account? <Link href='pages/Login' style={{ color: '#116ce2' }}>Login</Link></Text>
 
-            </KeyboardAvoidingView>
-            
+            </View>
+        </ScrollView>
+
     )
 }
 
