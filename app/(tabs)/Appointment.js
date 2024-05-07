@@ -19,7 +19,8 @@ import DropdownCom from "../components/Booking/DropdownCom";
 import Time from "../components/Booking/Time";
 import CheckBox from "../components/Booking/CheckBox";
 import { FONTS, COLORS, SIZES } from "../utils/theme";
-import {button} from '../components/button'
+import Detail from "../components/Booking/Detail";
+
 
 var { width, height } = Dimensions.get("window");
 const Appointment = () => {
@@ -52,6 +53,9 @@ const Appointment = () => {
     const month = today.getMonth();
     const year = today.getFullYear();
     return `${months[month]}, ${year}`;
+    //icon
+
+    
   }
 
   return (
@@ -122,7 +126,13 @@ const Appointment = () => {
             </View>
           </View>
         </View>
-
+        {/* User Details */}
+        {/* <View style={styles.detail}>
+          <Text style={styles.service_text}>User Detail</Text>
+          <Detail icon='user' text='name'/>
+          <Detail icon='mail' text='email'/>
+          <Detail icon='phone' text='phone number'/>
+        </View> */}
         {/* Dropdown */}
         <View style={styles.services}>
           <Text style={styles.service_text}>Choose Service</Text>
@@ -160,6 +170,7 @@ const Appointment = () => {
             <Time data={time} />
           </View>
         </View>
+
 
             {/* CheckBox and Input */}
         <View style={styles.allergiesContainer}>
@@ -293,4 +304,9 @@ const styles = StyleSheet.create({
     borderWidth:1,
     marginHorizontal:10,
   },
+  detail:{
+    width:width,
+    height:height*0.28,
+    justifyContent:'space-around'
+  }
 });
