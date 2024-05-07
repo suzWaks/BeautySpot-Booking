@@ -1,18 +1,20 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions } from 'react-native'
+import React, { useState } from 'react'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Testimonials from '../components/Testimonials'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { COLORS, FONTS, SIZES } from '../utils/theme';
+import Btns from '../components/button';
 
-
+var {width,height}=Dimensions.get('window');
 const Review = () => {
   return (
-    <View style={{ height: '100%', width: '100%' }}>
-      <View style={{ flex: 4, alignItems: 'center', justifyContent: 'space-around' }}>
+    <View style={{ height: height, width: width}}>
+      <View style={{alignItems: 'center', justifyContent: 'space-around',marginTop:height*0.02}}>
         <View style={styles.textArea}>
-          <View style={{ marginTop: '4%' }}>
-            <Icon name='message-outline' size={20} color='#1877F2' style={{ position: 'absolute' }} />
-            <Icon name="star" size={16} color="#1877F2" style={{ position: 'absolute', left: 2 }} />
+          <View style={{ marginTop: height*0.025 }}>
+            <Icon name='message-outline' size={23} color='#1877F2' style={{ position: 'absolute' }} />
+            <Icon name="star" size={18} color="#1877F2" style={{ position: 'absolute', left: 2 }} />
           </View>
           <TextInput
             placeholder='Write the review'
@@ -21,16 +23,16 @@ const Review = () => {
             editable
             multiline
             numberOfLines={8}
-            style={{ padding: 10, height: '90%', width: '90%', alignSelf: 'center' }} />
+            style={{ padding: 10, height: height*0.18, width: width*0.75, alignSelf: 'center',fontFamily:FONTS.regular,fontSize:SIZES.medium}} />
         </View>
         <View style={styles.rating}>
-          <Text>Rate Us</Text>
+          <Text style={{fontFamily:FONTS.regular,fontSize:SIZES.medium,color:COLORS.PRIMARY}}>Rate Us</Text>
           <View style={{ flexDirection: 'row' }}>
-            <Icon name="star" size={25} color="#1877F2" />
-            <Icon name="star" size={25} color="#1877F2" />
-            <Icon name="star" size={25} color="#1877F2" />
-            <Icon name="star-outline" size={25} color="#1877F2" />
-            <Icon name="star-outline" size={25} color="#1877F2" />
+            <Star/>
+            <Star/>
+            <Star/>
+            <Star/>
+            <Star/>
           </View>
         </View>
         <TouchableOpacity style={styles.button}>
@@ -38,14 +40,28 @@ const Review = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={{ flex: 6 }}>
-        <Testimonials />
+      <View style={{marginTop:height*0.1}}>
+        <Text style={{fontFamily:FONTS.bold,fontSize:SIZES.medium,textAlign:'center'}}>See what people has to say about us</Text>
+        <Testimonials style={{marginTop:height}} />
       </View>
     </View>
   )
 }
 
 export default Review
+const Star=()=>{
+  const [isSelect,setIsSelect]=useState(false)
+  const colorChange=()=>{
+    setIsSelect(!isSelect)
+  }
+  
+  return(
+    <TouchableOpacity onPress={()=>colorChange()}>
+      <Icon name="star" size={25} color={isSelect?COLORS.PRIMARY:COLORS.WHITE} />
+    </TouchableOpacity>
+  )
+
+}
 
 const styles = StyleSheet.create({
   navBar: {
@@ -61,8 +77,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   textArea: {
-    height: '40%',
-    width: '90%',
+    height: height*0.2,
+    width: width*0.9,
     borderRadius: 10,
     borderWidth: 1,
     flexDirection: 'row',
@@ -71,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   rating: {
+    height:height*0.08,
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -80,7 +97,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '40%',
-    height: '15%',
+    height: height*0.065,
     backgroundColor: "#116ce2",
     justifyContent: 'center',
     borderRadius: 30,
