@@ -11,6 +11,10 @@ import { useAuth } from '../../context/AuthContext';
 
 const { width } = Dimensions.get("window");
 
+const CustomTextInputIcon = ({ icon, ...props }) => {
+  return <TextInput.Icon icon={icon} {...props} />;
+};
+
 const Login = () => {
   const navigation = useNavigation();
 
@@ -42,7 +46,7 @@ const Login = () => {
         mode="outlined"
         style={styles.input}
         outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
-        left={<TextInput.Icon icon="email-outline" />}
+        left={<CustomTextInputIcon icon="email-outline" />}
         value={username}
         onChangeText={setUsername}
       />
@@ -57,12 +61,12 @@ const Login = () => {
         outlineStyle={{ borderRadius: 20, backgroundColor: "#ffffff" }}
         style={styles.input}
         right={
-          <TextInput.Icon
+          <CustomTextInputIcon
             icon={secureTextEntry ? "eye" : "eye-off"}
             onPress={togglePasswordVisibility}
           />
         }
-        left={<TextInput.Icon icon="lock-outline" />}
+        left={<CustomTextInputIcon icon="lock-outline" />}
         secureTextEntry={secureTextEntry}
         value={password}
         onChangeText={setPassword}

@@ -50,7 +50,9 @@ function MaleService() {
                 fontFamily={FONTS.medium}
                 dropdownStyles={{ marginVertical: 30, marginHorizontal: 30, backgroundColor: COLORS.WHITE }}
                 dropdownItemStyles={{ paddingVertical: 10 }}
+                keyExtractor={(item) => item.key.toString()} // Add this line to specify a key extractor
             />
+
 
             {service && (
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -61,10 +63,9 @@ function MaleService() {
                 </View>
             )}
 
-            {categories[service] && categories[service].map(category => (
-
-                <View style={styles.list}>
-                    <Text key={categories.key}>{category.value}</Text>
+            {categories[service] && categories[service].map((categoryItem) => (
+                <View key={categoryItem.key} style={styles.list}>
+                    <Text>{categoryItem.value}</Text>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity>
                             <MaterialCommunityIcons name="square-edit-outline" size={30} color={COLORS.PRIMARY} />
@@ -75,6 +76,7 @@ function MaleService() {
                     </View>
                 </View>
             ))}
+
 
             <View style={styles.buttonGroup}>
                 <Pressable style={[styles.button, { marginTop: 20 }]} onPress={showDialog}>
