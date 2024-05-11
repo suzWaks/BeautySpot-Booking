@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
   Dimensions,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
 import { Icon, MD3Colors, Checkbox } from "react-native-paper";
@@ -18,26 +19,44 @@ import DropdownCom from "../components/Booking/DropdownCom";
 import Time from "../components/Booking/Time";
 import CheckBox from "../components/Booking/CheckBox";
 import { FONTS, COLORS, SIZES } from "../utils/theme";
-import { router } from 'expo-router';
+import Detail from "../components/Booking/Detail";
+
 
 var { width, height } = Dimensions.get("window");
 const Appointment = () => {
-  // Calendar for the date
-  //   const [isModalVisible, setIsModalVisible] = useState(false);
-  //   const today = new Date();
-  //   const startDate = getFormatedDate(today, "YYYY/MM/DD");
-  //   const [selectedStartDate, setSelectedStartDate] = useState("");
-  //   const [startedDate, setStartedDate] = useState("2024/12/22");
-
-  const [time, setTime] = useState([1, 2, 3, 4, 5, 6, 7])
+  const [time, setTime] = useState([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+  ]);
+  const [currentDate, setCurrentDate] = useState(getDate());
 
   function handleChangeStartDate(propDate) {
     setStartedDate(propDate);
   }
 
-  // Logic to render the date, day and week day
+  //Function to get current date
+  function getDate() {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const today = new Date();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    return `${months[month]}, ${year}`;
+    //icon
 
-  const [text, setText] = React.useState("");
+    
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,7 +86,9 @@ const Appointment = () => {
             >
               Choose date
             </Text>
-            {/* <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+
+            {/* current date */}
+            <TouchableWithoutFeedback>
               <Text
                 style={{
                   color: COLORS.GRAY,
@@ -75,40 +96,10 @@ const Appointment = () => {
                   fontSize: SIZES.medium,
                 }}
               >
-                {startedDate}
+                {currentDate}
               </Text>
-            </TouchableOpacity>
-
-            <Modal
-              visible={isModalVisible}
-              animationType="fade"
-              transparent={true}
-            >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <DatePicker
-                    mode="calendar"
-                    selected={startedDate}
-                    onDateChange={handleChangeStartDate}
-                    onSelectedChange={(date) => setSelectedStartDate(date)}
-                    options={{
-                      backgroundColor: "#97637",
-                      textHeaderColor: "#000",
-                      textDefaultColor: "#FFFFFF",
-                      selectedTextColor: "#000",
-                      mainColor: "#469ab6",
-                      textSecondaryColor: "#FFFFFF",
-                      borderColor: "rgba(122,146,156,0.1)",
-                    }}
-                  />
-                  <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-                    <Text>submit</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </Modal> */}
+            </TouchableWithoutFeedback>
           </View>
-
           <View style={styles.datecard}>
             <View
               style={{
@@ -135,7 +126,13 @@ const Appointment = () => {
             </View>
           </View>
         </View>
-
+        {/* User Details */}
+        {/* <View style={styles.detail}>
+          <Text style={styles.service_text}>User Detail</Text>
+          <Detail icon='user' text='name'/>
+          <Detail icon='mail' text='email'/>
+          <Detail icon='phone' text='phone number'/>
+        </View> */}
         {/* Dropdown */}
         <View style={styles.services}>
           <Text style={styles.service_text}>Choose Service</Text>
@@ -147,12 +144,13 @@ const Appointment = () => {
           <DropdownCom style={styles.DropdownCom} />
         </View>
 
-        <View style={{ height: "20%", marginTop: "10%" }}>
+        <View style={{ height: height * 0.25, marginTop: height * 0.01 }}>
           <Text
             style={{
               marginLeft: 28,
               color: "gray",
               marginTop: height * 0.04,
+              marginBottom: height * 0.02,
               fontFamily: FONTS.regular,
               fontSize: SIZES.medium,
             }}
@@ -160,13 +158,27 @@ const Appointment = () => {
             Available Slots
           </Text>
           {/* Time slots */}
-          <Time data={time} style={styles.slots} />
+          <View
+            style={{
+              width: width,
+              height: height * 0.22,
+              backgroundColor: COLORS.WHITE,
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Time data={time} />
+          </View>
         </View>
 
+
+            {/* CheckBox and Input */}
         <View style={styles.allergiesContainer}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ flexDirection: "row", alignItems: "center",marginLeft:width*0.05 }}>
             <CheckBox />
-            <Text>Allergies?</Text>
+            <Text style={{ fontFamily: FONTS.regular, fontSize: SIZES.medium }}>
+              Allergies?
+            </Text>
           </View>
           <View style>
             <TextInput
@@ -178,13 +190,13 @@ const Appointment = () => {
               numberOfLines={8}
               style={{
                 padding: 10,
-                height: "90%",
-                width: "90%",
+                height: height*0.15,
+                width: width*0.9,
                 alignSelf: "center",
-                backgroundColor: "#D4D4D4",
-                borderRadius: 20,
+                backgroundColor:COLORS.WHITE,
+                borderRadius: 10,
                 borderWidth: 1,
-                borderColor: "#D4D4D4",
+                borderColor:"#EEEEEE",
               }}
             />
           </View>
@@ -193,21 +205,22 @@ const Appointment = () => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-around",
+            justifyContent: "center",
             alignItems: "center",
-            height: "10%",
-            marginBottom: "60%",
+            height: height*0.1,
+            marginBottom: height*0.2,
+            marginTop:height*0.00009,
           }}
         >
           <TouchableOpacity style={styles.button}>
-            <Text style={{ textAlign: "center", color: "#8F0000" }}>
-              Submit
+            <Text style={{ textAlign: "center", color: "#8F0000",fontFamily:FONTS.medium}}>
+              Cancel
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button}>
-            <Text style={{ textAlign: "center", color: "#8F0000" }}>
-              Cancel
+          <TouchableOpacity style={[styles.button,{backgroundColor:COLORS.PRIMARY}]}>
+            <Text style={{ textAlign: "center", color: "white" ,fontFamily:FONTS.medium}}>
+              Book Now
             </Text>
           </TouchableOpacity>
         </View>
@@ -278,28 +291,22 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     color: COLORS.GRAY,
   },
-  slots: {
-    width: width,
-    height: height * 0.26,
-    backgroundColor: COLORS.WHITE,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignContent: "space-around",
-    alignSelf: "center",
-    marginTop: height * 0.02,
-    marginBottom: height * 0.2,
-  },
   allergiesContainer: {
-    marginTop: "10%",
-    height: "20%",
+    height:height*0.26,
+    backgroundColor:COLORS.WHITE_BG,
+    marginTop:height*0.09
   },
   button: {
-    height: "50%",
-    width: "40%",
-    borderWidth: 2,
-    borderColor: "#8F0000",
+    height: height*0.06,
+    width: width*0.3,
     justifyContent: "center",
     borderRadius: 35,
+    borderWidth:1,
+    marginHorizontal:10,
   },
+  detail:{
+    width:width,
+    height:height*0.28,
+    justifyContent:'space-around'
+  }
 });
