@@ -8,14 +8,23 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import { Button, Card, Dialog, Portal, Provider } from "react-native-paper";
-import { router } from 'expo-router';
+import {
+  Button,
+  Dialog,
+  Portal,
+  TextInput,
+  Provider,
+} from "react-native-paper";
+import { router } from "expo-router";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
+  const [name, setName] = useState("Phurpa Tshering");
+  const [email, setEmail] = useState("yamea@gmail.com");
+  const [phone, setPhone] = useState("17171788");
 
   const pressHandler = () => {
-    router.navigate('/EditProfile');
+    router.navigate("/EditProfile");
   };
 
   const showDialog = () => setVisible(true);
@@ -27,97 +36,110 @@ const Profile = () => {
 
   return (
     <Provider>
-      <View>
-        <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
-          <View>
-            <Image
-              source={require("../assets/icons/google.png")}
-              style={{
-                padding: 10,
-                width: "100%",
-                backgroundColor: "#1877F2",
-                height: 150,
-              }}
-            ></Image>
-          </View>
-
-          <View style={{ alignItems: "center" }}>
+      <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
+        <View
+          style={{
+            padding: 10,
+            width: "100%",
+            backgroundColor: "#1877F2",
+            height: 150,
+          }}
+        >
+          {/* <TouchableOpacity
+            style={{
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
+              marginTop: 30,
+            }}
+          >
             <Image
               source={require("../assets/icon.png")}
-              style={{
-                width: 110,
-                height: 110,
-                borderRadius: 100,
-                marginTop: -50,
-              }}
+              style={{ width: 30, height: 30, marginLeft: "auto" }}
             ></Image>
-            <Text style={{ fontSize: 25, fontWeight: "bold", padding: 8 }}>
-              4Bits
-            </Text>
+          </TouchableOpacity> */}
+        </View>
+
+        <View style={{ alignItems: "center" }}>
+          <Image
+            source={require("../assets/Profile.jpg")}
+            style={{
+              width: 110,
+              height: 110,
+              borderRadius: 100,
+              marginTop: -60,
+            }}
+          ></Image>
+          <Text style={{ fontSize: 25, fontWeight: "bold", padding: 8 }}>
+            4Bits
+          </Text>
+        </View>
+        <View
+          style={{
+            marginTop: "2%",
+            borderBottomWidth: 1,
+            borderColor: "lightgray",
+            width: "100%",
+          }}
+        >
+          <View style={{ backgroundColor: "white" }}>
+            <View style={style.text}>
+              <TextInput
+                underlineColor="transparent"
+                editable={false}
+                value={name}
+                onChangeText={(value) => setName(value)}
+                style={[style.input, style.shadowProp]}
+                underlineStyle={{ borderRadius: 100 }}
+                left={<TextInput.Icon icon="account-outline" />}
+              />
+              <TextInput
+                underlineColor="transparent"
+                editable={false}
+                value={email}
+                onChangeText={(value) => setEmail(value)}
+                style={style.input}
+                left={<TextInput.Icon icon="email-outline" />}
+              />
+              <TextInput
+                underlineColor="transparent"
+                editable={false}
+                value={phone}
+                onChangeText={(value) => setPhone(value)}
+                style={style.input}
+                left={<TextInput.Icon icon="phone-outline" />}
+                keyboardType="numeric"
+              />
+            </View>
           </View>
-          <Card
-            style={{
-              marginTop: 20,
-              borderBottomWidth: 1,
-              borderColor: "lightgray",
-              borderTopLeftRadius: 23,
-              borderTopRightRadius: 23,
-              width: "95%",
-              marginLeft: "2.5%",
-              marginEnd: "1%",
-            }}
+        </View>
+
+        <View style={style.buttonContainer}>
+          <Button
+            icon={"logout"}
+            title="Press me"
+            style={style.button}
+            onPress={showDialog}
           >
-            <Card.Title title="User Details" style={{ alignItems: "center" }} />
-            <Card.Content style={{ backgroundColor: "white" }}>
-              <View style={style.text}>
-                <Text style={style.text}>Phurpa Tshering</Text>
-                <Text style={style.text}>02210215.cst@rub.edu.bt</Text>
-                <Text style={style.text}>IT Department</Text>
-                <Text style={style.text}>3rd Year</Text>
-              </View>
-            </Card.Content>
-          </Card>
-          <Card
-            style={{
-              marginTop: 20,
-              borderBottomWidth: 1,
-              borderColor: "lightgray",
-              borderTopLeftRadius: 23,
-              borderTopRightRadius: 23,
-              width: "95%",
-              marginLeft: "2.5%",
-              marginEnd: "1%",
-              alignContent: "center",
-            }}
+            Logout
+          </Button>
+          <Button
+            icon={"square-edit-outline"}
+            title="Press me"
+            style={style.button}
+            onPress={pressHandler}
           >
-            <Card.Title title="Actions" style={{ alignItems: "center" }} />
-            <Card.Content style={{ backgroundColor: "white" }}>
-              <View style={style.buttonContainer}>
-                <Button
-                  icon={"logout"}
-                  title="Press me"
-                  style={style.button}
-                  onPress={showDialog}
-                >
-                  Logout
-                </Button>
-                <Button
-                  icon={"square-edit-outline"}
-                  title="Press me"
-                  style={style.button}
-                  onPress={pressHandler}
-                >
-                  Edit
-                </Button>
-              </View>
-            </Card.Content>
-          </Card>
-        </ScrollView>
-      </View>
+            Edit
+          </Button>
+        </View>
+      </ScrollView>
 
       {/* Dialog component */}
       <Portal>
-        <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog
+          visible={visible}
+          onDismiss={hideDialog}
+          // dialogContainerStyle={{ backgroundColor: "white" }}
+        >
           <Dialog.Title>Logout</Dialog.Title>
           <Dialog.Content>
             <Text>Are you sure you want to logout?</Text>
@@ -145,10 +167,13 @@ const style = StyleSheet.create({
   },
   text: {
     padding: 10,
+    backgroundColor: "rgba(17, 108, 226, 0.07)",
+    marginEnd: "1%",
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignSelf: "center",
   },
   button: {
     textAlign: "center",
@@ -159,5 +184,20 @@ const style = StyleSheet.create({
     borderRadius: 15,
     marginLeft: 20,
     marginEnd: 20,
+  },
+  input: {
+    width: "100%",
+    marginTop: 5,
+    marginBottom: 10,
+    backgroundColor: "white",
+    borderRadius: 15,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
   },
 });
